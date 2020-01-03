@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <title>Classification result</title>
+        
+    </head>
+
+    <body>
+
+        <h1>  Uploaded image is a {{ prediction.value }} </h1>
+
+        <img src=" {{url_for('send_image', filename=prediction.sample_image)}}" 
+        style="width:500px;height:500px;">
+
+        <form action = "{{ url_for('index') }}" style="text-align:left">
+            <input type="submit" value="New Request" />
+        </form>
+
+    </body>
+</html>

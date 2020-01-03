@@ -1,0 +1,23 @@
+{
+    "python.pythonPath": "venv\\Scripts\\python.exe",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "editor.rulers": [
+        79
+    ],
+    "git.ignoreLimitWarning": true,
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "C:/Users/tim.lechner/source/productionizing_ML_models"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "python": "$pythonPath -u $fullFileName"
+    },
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}

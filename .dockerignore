@@ -1,0 +1,21 @@
+# user data
+.git
+.pytest_cache
+.vscode
+.gitignore
+__pycache__
+
+# models large in size
+models/knn_model.sav
+models/dt_model.sav
+
+# virtual environments
+venv
+**/venv/**
+
+# image data used for training and testing
+**/fruits-360/**
+fruits-360/*
+fruits-360
+
+
