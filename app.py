@@ -9,9 +9,7 @@ from flask import Flask, request, render_template, send_from_directory
 from flask_cors import CORS
 from gevent.pywsgi import WSGIServer
 from load_data import load_single_image, FRUITS, trim
-from custom_vision.load_data import load_image
-from custom_vision.load_model import load_model_and_tags
-from custom_vision.predict import predict_image
+
 
 app = Flask(__name__)
 
@@ -72,30 +70,6 @@ def upload():
     return render_template("complete_display_image.html",
                            prediction=prediction,
                            fruits=FRUITS)
-
-
-@app.route('/upload_cv', methods=["POST"])
-def upload_cv():
-    for upload in request.files.getlist("file"):
-
-        # load model and tags
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        dir_path = os.path.join(dir_path, 'custom_vision')
-        labels = load_model_and_tags(dir_path)
-
-        # Load image
-        augmented_image = load_image(upload)
-
-        # predict image
-        prediction_value = predict_image(augmented_image, labels)
-        print(prediction_value)
-
-        sample_image = prediction_value + '.jpg'
-        prediction = {'value': prediction_value, 'sample_image': sample_image}
-
-    return render_template("complete_display_image.html",
-                           prediction=prediction,
-                           fruits=labels)
 
 
 @app.route('/upload/<filename>')
