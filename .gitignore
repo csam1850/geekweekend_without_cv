@@ -1,0 +1,14 @@
+# virtual environments
+**/venv/**
+venv/
+
+# user data
+__pycache__
+**/__pychache__
+.pytest_cache
+
+# models large in size
+models/**
+**/models/**
+dt_model.sav
+knn_model.sav
