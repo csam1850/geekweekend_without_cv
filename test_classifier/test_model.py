@@ -1,6 +1,9 @@
 import os
 import pickle
 from load_data import load_single_image, trim, FRUITS
+import warnings
+
+warnings.simplefilter("ignore", UserWarning)
 
 DIM = 100
 
@@ -10,14 +13,12 @@ def test_classifier(image_name, expected):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     image_path = os.path.join(dir_path, image_name)
 
-    # crop image and save to disk
-    cropped_image = trim(image_path)
-    cropped_image = cropped_image.convert('RGB')
-    image_path = os.path.join(dir_path, image_name[:-4] + "_crop.jpeg")
-    cropped_image.save(image_path, format='jpeg')
+    # crop image
+    image = trim(image_path)
+    image = image.convert('RGB')
 
-    # loading data from specified path
-    img = load_single_image(image_path)
+    # loading image
+    img = load_single_image(image)
 
     # loading scaling data and scaling data
     filename = 'models/scaler.sav'
@@ -28,8 +29,9 @@ def test_classifier(image_name, expected):
     filename = 'models/svm_model.sav'
     svm_model = pickle.load(open(filename, 'rb'))
     result = int(svm_model.predict(image_data))
-
-    print(FRUITS[result])
+    print(f'Expected result is {expected}')
+    print(f'Actual result is {FRUITS[result]}')
+    print()
     assert FRUITS[result] == expected
 
 

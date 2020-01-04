@@ -15,7 +15,7 @@
         "python": "$pythonPath -u $fullFileName"
     },
     "python.testing.pytestArgs": [
-        "tests"
+        "test_classifier"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,

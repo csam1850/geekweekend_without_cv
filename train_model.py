@@ -19,15 +19,17 @@ X_test = scaler.fit_transform([i.flatten() for i in X_test])
 
 print('training starts now')
 # SVM
-svm_model = SVC(gamma='auto', kernel='linear')
+svm_model = SVC(gamma='auto', kernel='linear', C=0.9)
 svm_model.fit(X_train, y)
 y_pred = svm_model.predict(X_test)
 precision = metrics.accuracy_score(y_pred, y_test) * 100
 print("Accuracy with SVM: {0:.2f}%".format(precision))
-# save models to disk
+
+# save model to disk
 filename = 'models/svm_model.sav'
 pickle.dump(svm_model, open(filename, 'wb'))
 
+# plot confusion matrix
 cm, _ = plot_confusion_matrix(y_test, y_pred, normalize=True)
 plt.show()
 

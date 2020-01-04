@@ -1,19 +1,29 @@
 # setting up your workspace
 
 ## Installation requirements
+### Azure Account
+if you don't have an Azure Acount you can sign up for a free trial Account.
+
 ### necessary software
-[git client](https://git-scm.com/download/win)  
 [python 3.7.5 64-bit](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)  
+When installing Python, make sure to choose the version specified above, Python 3.7.5 in 64-bit version. Also install Pip with Python and tick add Python to Environment Variables during your installation.
+
 [vs code](https://code.visualstudio.com/download#)  
 [docker for windows](https://docs.docker.com/docker-for-windows/install/)  
+when installing docker for windows do not mark the option use Windows Container instead of Linux Container  
+Also note that you have to create a docker account in order to install the software
 [azure cli](https://docs.microsoft.com/de-de/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 
+### optional software
+[git client](https://git-scm.com/download/win)  
+
 ### recommended vs code extensions
-[python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  
+[python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 
 [code runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  
 [intelliCode](https://visualstudio.microsoft.com/de/services/intellicode/)  
 [docker](https://code.visualstudio.com/docs/azure/docker)  
-[Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
+[Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)  
+When installing extensions and loading the workspace, vs code will prompt for further installs. Always click allow and install.
 
 
 ## set-up instructions
@@ -29,10 +39,11 @@ git push -u origin master
 
 ### setting up your python-workspace
 Please note I deliberatly uploaded .vscode to github which contains hardcoded 
-information from my personal workspace, which you need to adjust. The important
-part is the PythonPath environment variable, which should point to your 
-repository and not to your python.exe as one might expect from its name. 
-If you encounter a Module-not-found error you probably have this issue.  
+information from my personal workspace, which you need to adjust.
+To do that you have to open the folder .vscode, right click workscpace.code-workspace and open it with an editor. 
+The important part is the PythonPath environment variable, which you have to adjust, so it points to your repository. 
+If you encounter a Module-not-found error lateron you probably have an issue with your PythonPath.  
+To set up your workspace go to vs code / File / open workspace and select the workspace file in the .vscode folder.
   
 
 ```shell
