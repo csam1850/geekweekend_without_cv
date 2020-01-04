@@ -1,6 +1,6 @@
 import os
 import pickle
-from load_data import load_single_image, trim, FRUITS
+from load_data import load_single_image, FRUITS
 import warnings
 
 warnings.simplefilter("ignore", UserWarning)
@@ -13,17 +13,17 @@ def test_classifier(image_name, expected):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     image_path = os.path.join(dir_path, image_name)
 
-    # crop image
-    image = trim(image_path)
-    image = image.convert('RGB')
+    # # crop image
+    # image = trim(image_path)
+    # image = image.convert('RGB')
 
     # loading image
-    img = load_single_image(image)
+    image = load_single_image(image_path)
 
     # loading scaling data and scaling data
     filename = 'models/scaler.sav'
     scaler = pickle.load(open(filename, 'rb'))
-    image_data = scaler.transform([i.flatten() for i in img])
+    image_data = scaler.transform([i.flatten() for i in image])
 
     # loading model and predicting values
     filename = 'models/svm_model.sav'

@@ -9,15 +9,22 @@ import numpy as np
 import cv2
 import os
 import glob
-import matplotlib.pyplot as plt
-from PIL import Image, ImageChops
+from PIL import Image
 
 FRUITS = ['Orange', 'Banana', 'Strawberry', 'Kiwi', 'Lemon',
           'Pineapple', 'Avocado', 'Nectarine', 'Nectarine Flat',
           'Passion Fruit', 'Apricot']
 
 
-def load_fruit_data(fruits, data_type, dim=100, print_n=False, k_fold=False):
+def crop_center(image):
+    h, w = image.shape[:2]
+    min_dim = min(w, h)
+    startx = w // 2 - (min_dim // 2)
+    starty = h // 2 - (min_dim // 2)
+    return image[starty:starty+min_dim, startx:startx+min_dim]
+
+
+def load_fruit_data(fruits, data_type, dim=100, print_n=True, k_fold=False):
     paths = []
     images = []
     labels = []
@@ -31,6 +38,7 @@ def load_fruit_data(fruits, data_type, dim=100, print_n=False, k_fold=False):
             j = 0
             for image_path in glob.glob(os.path.join(p, "*.jpg")):
                 img = cv2.imread(image_path, cv2.IMREAD_COLOR)
+                img = crop_center(img)
                 img = cv2.resize(img, (dim, dim))
                 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
                 images.append(img)
@@ -51,6 +59,7 @@ def load_fruit_data(fruits, data_type, dim=100, print_n=False, k_fold=False):
                 j = 0
                 for image_path in glob.glob(os.path.join(p, "*.jpg")):
                     img = cv2.imread(image_path, cv2.IMREAD_COLOR)
+                    img = crop_center(img)
                     img = cv2.resize(img, (dim, dim))
                     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
                     images.append(img)
@@ -77,54 +86,13 @@ def load_single_image(image_path, dim=100):
     format
     """
     if not isinstance(image_path, str):
-        img = cv2.cvtColor(np.array(image_path), cv2.COLOR_RGB2BGR)
+        img = Image.open(image_path)
+        img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
     else:
         img = cv2.imread(image_path, cv2.IMREAD_COLOR)
+    img = crop_center(img)
     img = cv2.resize(img, (dim, dim))
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     img = np.array([img])
 
     return img
-
-
-def trim(path):
-    im = Image.open(path)
-    bg = Image.new(im.mode, im.size, (255, 255, 255))
-    diff = ImageChops.difference(im, bg)
-    diff = ImageChops.add(diff, diff, 2.0, -100)
-    # Bounding box given as a 4-tuple defining the left, upper, right, and
-    # lower pixel coordinates.
-    # If the image is completely empty, this method returns None.
-    bbox = diff.getbbox()
-    if bbox:
-        return im.crop(bbox)
-    else:
-        return im
-
-
-def class_number(y):
-    v = []
-    i = 0
-    count = 0
-    for index in y:
-        if(index == i):
-            count += 1
-        else:
-            v.append(count)
-            count = 1
-            i += 1
-    v.append(count)
-    return v
-
-
-def plot_image_grid(images, nb_rows, nb_cols, figsize=(15, 15)):
-    assert len(images) == nb_rows*nb_cols, "Number of images should be the "\
-                                           "same as (nb_rows*nb_cols)"
-    fig, axs = plt.subplots(nb_rows, nb_cols, figsize=figsize)
-
-    n = 0
-    for i in range(0, nb_rows):
-        for j in range(0, nb_cols):
-            axs[i, j].axis('off')
-            axs[i, j].imshow(images[n])
-            n += 1

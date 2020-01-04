@@ -8,7 +8,7 @@ import os
 from flask import Flask, request, render_template, send_from_directory
 from flask_cors import CORS
 from gevent.pywsgi import WSGIServer
-from load_data import load_single_image, FRUITS, trim
+from load_data import load_single_image, FRUITS
 
 
 app = Flask(__name__)
@@ -34,9 +34,9 @@ def index():
 @app.route("/upload", methods=["POST"])
 def upload():
     print(request.files.getlist("file"))
-    for upload in request.files.getlist("file"):
-        print("{} is the file name".format(upload.filename))
-        filename = upload.filename
+    for image in request.files.getlist("file"):
+        print("{} is the file name".format(image.filename))
+        filename = image.filename
 
         # This is to verify files are supported
         ext = os.path.splitext(filename)[1]
@@ -46,12 +46,12 @@ def upload():
             render_template("Error.html", message="Files uploaded are not" /
                                                   " supported...")
 
-        # crop image
-        cropped_image = trim(upload)
-        cropped_image = cropped_image.convert('RGB')
+        # # crop image
+        # cropped_image = trim(image)
+        # cropped_image = cropped_image.convert('RGB')
 
         # loading data in desired form
-        img = load_single_image(cropped_image)
+        img = load_single_image(image)
 
         # loading scaling data and scale
         file_path = 'models/scaler.sav'

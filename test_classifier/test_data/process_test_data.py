@@ -11,7 +11,7 @@ size for the custom vision classifier.
 import os
 import glob
 import cv2
-from load_data import trim
+from load_data import crop_center
 
 
 def preprocess_image_for_ml_algo():
@@ -26,17 +26,13 @@ def preprocess_image_for_ml_algo():
         for image_path in glob.glob(os.path.join(image_dir_path, "*.jfif")):
 
             img = cv2.imread(image_path, cv2.IMREAD_COLOR)
+            img = crop_center(img)
             img = cv2.resize(img, (100, 100))
             base_path = '.'.join([image_path.split('.')[0],
                                   image_path.split('.')[1]])
             new_path = '.'.join([base_path, image_path.split('.')[2]])
             cv2.imwrite(new_path, img)
 
-            # crop image and save to disk
-            cropped_image = trim(new_path)
-            cropped_image = cropped_image.convert('RGB')
-            new_path = base_path + '_cropped' + ".jpeg"
-            cropped_image.save(new_path, format='jpeg')
             pass
 
 

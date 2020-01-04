@@ -1,4 +1,5 @@
 import pickle
+import os
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier  # noqa: F401
 from sklearn.tree import DecisionTreeClassifier  # noqa: F401
@@ -8,21 +9,36 @@ import matplotlib.pyplot as plt
 from load_data import load_fruit_data, FRUITS
 from model_evaluation import plot_confusion_matrix
 
+
+# create folder to save model and scaling weights
+root_dir = os.path.dirname(os.path.abspath(__file__))
+path = os.path.join(root_dir, 'models')
+if not os.path.isdir(path):
+    os.mkdir(path)
+
 # Get Images and Labels
 X, y = load_fruit_data(FRUITS, 'Training')
 X_test, y_test = load_fruit_data(FRUITS, 'Test')
+
+print('scaling images')
 
 # Scale Data Images
 scaler = StandardScaler()
 X_train = scaler.fit_transform([i.flatten() for i in X])
 X_test = scaler.fit_transform([i.flatten() for i in X_test])
 
+# Save scaler to disk
+scalerfile = 'models/scaler.sav'
+pickle.dump(scaler, open(scalerfile, 'wb'))
+
 print('training starts now')
+
 # SVM
 svm_model = SVC(gamma='auto', kernel='linear', C=0.9)
 svm_model.fit(X_train, y)
 y_pred = svm_model.predict(X_test)
 precision = metrics.accuracy_score(y_pred, y_test) * 100
+
 print("Accuracy with SVM: {0:.2f}%".format(precision))
 
 # save model to disk
