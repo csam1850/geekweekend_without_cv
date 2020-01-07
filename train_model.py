@@ -28,7 +28,7 @@ if not os.path.isdir(path):
     os.mkdir(path)
 
 # Get Images and Labels
-X_train, y_train = load_fruit_data(FRUITS, data_type='Training', rotations=1)
+X_train, y_train = load_fruit_data(FRUITS, data_type='Training')
 X_test, y_test = load_fruit_data(FRUITS, 'Test')
 
 print('scaling images')
@@ -48,7 +48,7 @@ print('training starts now')
 pca = PCA(n_components=50, whiten=True, random_state=42)
 
 # Support vector machine model - kernel choices were linear / rbf
-svm = SVC(kernel='rbf', C=100, gamma=0.0001)
+svm = SVC(kernel='rbf', C=150, gamma=0.0002)
 
 # pipeline
 model = make_pipeline(pca, svm)
@@ -58,14 +58,14 @@ model = make_pipeline(pca, svm)
 #               'svc__gamma': [0.00005, 0.0001, 0.001],
 #               'pca__n_components': [25, 50, 100]}
 
-# param_grid = {'svc__C': [100, 350, 500],
+# param_grid = {'svc__C': [50, 100, 150],
 #               'svc__gamma': [0.00005, 0.0001, 0.0002]}
 # print('performing grid search of parameters')
 
 # param_grid = {'pca__n_components': [25, 50, 75]}
 
-param_grid = {'svc__C': [100],
-              'svc__gamma': [0.0001]}
+param_grid = {'svc__C': [150],
+              'svc__gamma': [0.0002]}
 
 grid = GridSearchCV(model, param_grid, cv=5)
 

@@ -108,6 +108,14 @@ https://www.kaggle.com/waltermaffy/fruit-classification-pca-svm-knn-decision-tre
 ## example Flask-apps
 https://github.com/OkanKY/keras-flask-webapp  
 https://github.com/ibrahimokdadov/upload_file_python
+
+## data augmentation
+https://gogul.dev/software/image-classification-python  
+https://kapernikov.com/tutorial-image-classification-with-scikit-learn/  
+https://rpubs.com/Sharon_1684/454441  
+
+## support vector machines
+https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html  
   
 # Tutorials
 ## creating docker images
