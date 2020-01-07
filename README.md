@@ -11,17 +11,20 @@ When installing Python, make sure to choose the version specified above, Python 
 [vs code](https://code.visualstudio.com/download#)  
 [docker for windows](https://docs.docker.com/docker-for-windows/install/)  
 when installing docker for windows do not mark the option use Windows Container instead of Linux Container  
-Also note that you have to create a docker account in order to install the software
+Also note that you have to create a docker account in order to install the software  
 [azure cli](https://docs.microsoft.com/de-de/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 
 ### optional software
 [git client](https://git-scm.com/download/win)  
 
 ### recommended vs code extensions
+for installing the extensions, you can either click the links below and click 
+on install, or you can open VS Code go to marketplace and type in the extensions there
+
 [python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 
 [code runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  
-[intelliCode](https://visualstudio.microsoft.com/de/services/intellicode/)  
-[docker](https://code.visualstudio.com/docs/azure/docker)  
+[intelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)  
+[docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)  
 [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)  
 When installing extensions and loading the workspace, vs code will prompt for further installs. Always click allow and install.
 
@@ -55,7 +58,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## starting the application
+# starting the application
 ### starting local Flask-Server 
 
 ```shell

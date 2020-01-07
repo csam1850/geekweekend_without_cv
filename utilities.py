@@ -1,7 +1,8 @@
 """
 in this module are helper functions implemented
 """
-# pylint: disable=no-member, unused-variable
+# pylint: disable=no-member, unused-variable, expression-not-assigned
+# pylint: disable=invalid-name
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,8 +12,11 @@ from skimage.feature import hog
 from skimage.color import rgb2grey
 
 
-def display_one(a, title1="Original"):
-    plt.imshow(a), plt.title(title1)
+def display_one(a, title="Original"):
+    '''
+    displaying the image - useful for debugging and to look in the engine
+    '''
+    plt.imshow(a), plt.title(title)
     plt.xticks([]), plt.yticks([])
     plt.show()
 
@@ -30,6 +34,11 @@ def crop_center(image):
 
 
 def trim(image):
+    '''
+    this methods crops the image if there is a white margin around the image
+    in a squared format - it is useful for centering an image but stability of
+    method is limited
+    '''
     img = Image.fromarray(image)
     bg = Image.new(img.mode, img.size, (255, 255, 255))
     diff = ImageChops.difference(img, bg)
@@ -58,25 +67,29 @@ def trim(image):
         bbox = (startw, starth, endw, endh)
         # display_one(np.array(img.crop(bbox)), 'cropped')
         return cv2.cvtColor(np.array(img.crop(bbox)), cv2.COLOR_RGB2BGR)
-    else:
-        return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+    return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 
 def hog_features(image):
+    '''
+    this method extracts hog features
+    '''
     # flatten three channel color image
     # color_features = image.flatten()
     # convert image to greyscale
     grey_image = rgb2grey(image)
     # get HOG features from greyscale image
-    hog_features = hog(grey_image, block_norm='L2-Hys',
-                       pixels_per_cell=(16, 16))
+    hog_feat = hog(grey_image, block_norm='L2-Hys', pixels_per_cell=(16, 16))
     # combine color and hog features into a single array
     # flat_features = np.hstack(color_features, hog_features)
-    return hog_features
+    return hog_feat
 
 
 # feature-descriptor-1: Hu Moments
 def hu_moments(image):
+    '''
+    this methods extracts hu moments
+    '''
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     feature = cv2.HuMoments(cv2.moments(image)).flatten()
     return feature
@@ -84,6 +97,9 @@ def hu_moments(image):
 
 # feature-descriptor-3: Color Histogram
 def col_histogram(image, bins=8):
+    '''
+    this method generates a color histogram of the image
+    '''
     # convert the image to HSV color-space
     image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
@@ -98,8 +114,13 @@ def col_histogram(image, bins=8):
 
 
 def segmentation(image):
+    '''
+    this methods segments background from foreground - it is similar to the
+    watershed algorithm
+    '''
     # Segmentation
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+
     # Otsu's thresholding
     ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV +
                                 cv2.THRESH_OTSU)
@@ -113,23 +134,6 @@ def segmentation(image):
     sure_bg = cv2.dilate(opening, kernel, iterations=3)
     # display_one(sure_bg, 'background after noise')
     markers = sure_bg
-
-    # # Finding sure foreground area
-    # dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-    # ret, sure_fg = cv2.threshold(dist_transform, 0.7 * dist_transform.max(),
-    #                              255, 0)
-    # # Finding unknown region
-    # sure_fg = np.uint8(sure_fg)
-    # unknown = cv2.subtract(sure_bg, sure_fg)
-    # # Marker labelling
-    # ret, markers = cv2.connectedComponents(sure_fg)
-    # # Add one to all labels so that sure background is not 0, but 1
-    # markers = markers + 1
-    # # Now, mark the region of unknown with zero
-    # markers[unknown == 255] = 0
-    # display_one(markers, 'markers before watershed')
-    # # apply watershed algorithm
-    # markers = cv2.watershed(image, markers)
 
     # Make the background white, and what we want to keep black
     markers[markers > 1] = 255
@@ -155,3 +159,19 @@ def segmentation(image):
 
     # display_one(image, 'final image after watershed')
     return image
+
+
+def rotate_image(image):
+    '''
+    rotates an image by 90 degrees
+    '''
+    # get the width and height
+    height, width = image.shape[:2]
+
+    # get the rotation matrix
+    rotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), 90, 1)
+
+    # rotate the image
+    image_rotated = cv2.warpAffine(image, rotation_matrix, (width, height))
+
+    return image_rotated

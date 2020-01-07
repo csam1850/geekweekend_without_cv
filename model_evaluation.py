@@ -1,15 +1,17 @@
 """
 this module serves for assessing model performance
 """
-# pylint: disable=no-member
+# pylint: disable=no-member, invalid-name
 
 import numpy as np
 from sklearn import metrics
 import matplotlib.pyplot as plt
 from load_data import FRUITS
 
+FRUIT_LS = FRUITS.copy()
 
-def plot_confusion_matrix(y_true, y_pred, fruits=FRUITS, normalize=False,
+
+def plot_confusion_matrix(y_true, y_pred, fruits=FRUIT_LS, normalize=False,
                           title=None, cmap=plt.cm.Blues):
     """
     This function prints and plots the confusion matrix.

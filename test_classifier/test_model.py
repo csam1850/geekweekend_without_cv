@@ -1,7 +1,10 @@
+"""
+the module serves for testing the classifier
+"""
 import os
 import pickle
-from load_data import load_single_image, FRUITS
 import warnings
+from load_data import load_single_image, FRUITS
 
 warnings.simplefilter("ignore", UserWarning)
 
@@ -9,13 +12,12 @@ DIM = 100
 
 
 def test_classifier(image_name, expected):
+    '''
+    this function tests if expected and actual classification are the same
+    '''
     # load image data
     dir_path = os.path.dirname(os.path.realpath(__file__))
     image_path = os.path.join(dir_path, image_name)
-
-    # # crop image
-    # image = trim(image_path)
-    # image = image.convert('RGB')
 
     # loading image
     image = load_single_image(image_path)

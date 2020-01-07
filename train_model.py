@@ -1,5 +1,11 @@
+"""
+this module is used for training the classifier
+"""
+# pylint: disable=unused-import, invalid-name
+
 import pickle
 import os
+from time import time
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier  # noqa: F401
 from sklearn.tree import DecisionTreeClassifier  # noqa: F401
@@ -11,7 +17,6 @@ from sklearn.pipeline import make_pipeline
 import matplotlib.pyplot as plt
 from load_data import load_fruit_data, FRUITS
 from model_evaluation import plot_confusion_matrix
-from time import time
 
 
 start = time()
@@ -23,7 +28,7 @@ if not os.path.isdir(path):
     os.mkdir(path)
 
 # Get Images and Labels
-X_train, y_train = load_fruit_data(FRUITS, 'Training')
+X_train, y_train = load_fruit_data(FRUITS, data_type='Training', rotations=1)
 X_test, y_test = load_fruit_data(FRUITS, 'Test')
 
 print('scaling images')
@@ -43,22 +48,23 @@ print('training starts now')
 pca = PCA(n_components=50, whiten=True, random_state=42)
 
 # Support vector machine model - kernel choices were linear / rbf
-svm = SVC(kernel='rbf', C=350, gamma=0.0001)
+svm = SVC(kernel='rbf', C=100, gamma=0.0001)
 
 # pipeline
 model = make_pipeline(pca, svm)
 
 # grid search for hyperparameters
-# param_grid = {'svc__C': [100, 350],
+# param_grid = {'svc__C': [150, 350],
 #               'svc__gamma': [0.00005, 0.0001, 0.001],
-#               'pca__n_components': [50, 100]}
+#               'pca__n_components': [25, 50, 100]}
 
-# param_grid = {'svc__C': [350, 500, 650],
-#               'svc__gamma': [0.0001, 0.0002, 0.0005]}
+# param_grid = {'svc__C': [100, 350, 500],
+#               'svc__gamma': [0.00005, 0.0001, 0.0002]}
+# print('performing grid search of parameters')
 
-# param_grid = {'pca__n_components': [10, 25, 50]}
+# param_grid = {'pca__n_components': [25, 50, 75]}
 
-param_grid = {'svc__C': [350],
+param_grid = {'svc__C': [100],
               'svc__gamma': [0.0001]}
 
 grid = GridSearchCV(model, param_grid, cv=5)

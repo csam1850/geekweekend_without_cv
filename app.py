@@ -2,6 +2,7 @@
 This is the classifier API
 
 """
+# pylint: disable=invalid-name
 
 import pickle
 import os
@@ -22,17 +23,27 @@ CORS(app)
 # Liveness test
 @app.route('/healthcheck', methods=['GET', 'POST'])
 def liveness2():
+    '''
+    simple function to check if the app is online
+    '''
     return 'API Live!', 200
 
 
 @app.route('/index')
 @app.route("/")
 def index():
+    '''
+    returning the html template with the start screen to upload an image
+    '''
     return render_template("upload.html", fruits=FRUITS)
 
 
 @app.route("/upload", methods=["POST"])
 def upload():
+    '''
+    handling the uploaded file, predicting the fruit and sending it to the
+    results html template
+    '''
     print(request.files.getlist("file"))
     for image in request.files.getlist("file"):
         print("{} is the file name".format(image.filename))
@@ -43,12 +54,8 @@ def upload():
         if (ext == ".jpg") or (ext == ".jpeg"):
             print("File supported moving on...")
         else:
-            render_template("Error.html", message="Files uploaded are not" /
-                                                  " supported...")
-
-        # # crop image
-        # cropped_image = trim(image)
-        # cropped_image = cropped_image.convert('RGB')
+            render_template("Error.html",
+                            message="Files uploaded are not supported...")
 
         # loading data in desired form
         img = load_single_image(image)
@@ -72,9 +79,13 @@ def upload():
                            fruits=FRUITS)
 
 
-@app.route('/upload/<filename>')
+@app.route('/upload/<filename>', methods=['GET', 'POST'])
 def send_image(filename):
-    return send_from_directory('images', filename)
+    '''
+    sending an image from a directory - built in flask method
+    this method is used to display to predicted image on the results screen
+    '''
+    return send_from_directory('UPLOAD_FOLDER', filename)
 
 
 # running REST interface
