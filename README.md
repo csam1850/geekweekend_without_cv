@@ -6,8 +6,7 @@ if you don't have an Azure Acount you can sign up for a free trial Account.
 
 ### necessary software
 [python 3.7.5 64-bit](https://www.python.org/ftp/python/3.7.5/python-3.7.5-amd64.exe)  
-When installing Python, make sure to choose the version specified above, Python 3.7.5 in 64-bit version. Also install Pip with Python and tick add Python to Environment Variables during your installation.
-
+When installing Python, make sure to choose the version specified above, Python 3.7.5 in 64-bit version. Also install Pip with Python and tick add Python to Environment Variables during your installation.  
 [vs code](https://code.visualstudio.com/download#)  
 [docker for windows](https://docs.docker.com/docker-for-windows/install/)  
 when installing docker for windows do not mark the option use Windows Container instead of Linux Container  
@@ -92,8 +91,8 @@ right click the image and push *OR ALERNATIVELY* on the Command Palette (Ctrl+Sh
 right click the image in the registry and press `Deploy Image to Azure App Service`  
 follow the prompts  
 go to Azure App Service in vs code right click your application and press
-`Add New Setting...`. Type in WEBSITES_PORT and 5000 to expose the port of your
-container
+`Add New Setting...`. 
+Type in WEBSITES_PORT and 5000 to expose the port of your container
 
 
 # Sources
