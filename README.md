@@ -20,7 +20,7 @@ Also note that you have to create a docker account in order to install the softw
 for installing the extensions, you can either click the links below and click 
 on install, or you can open VS Code go to marketplace and type in the extensions there
 
-[python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) 
+[python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  
 [code runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)  
 [intelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)  
 [docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)  
@@ -49,7 +49,7 @@ To set up your workspace go to vs code / File / open workspace and select the wo
   
 
 ```shell
-# this command creates a virtal environment  
+# this command creates a virtual environment  
 python -m venv venv  
 # activating the environment  
 venv\Scripts\activate  

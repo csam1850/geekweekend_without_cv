@@ -74,14 +74,10 @@ def hog_features(image):
     '''
     this method extracts hog features
     '''
-    # flatten three channel color image
-    # color_features = image.flatten()
     # convert image to greyscale
     grey_image = rgb2grey(image)
     # get HOG features from greyscale image
     hog_feat = hog(grey_image, block_norm='L2-Hys', pixels_per_cell=(16, 16))
-    # combine color and hog features into a single array
-    # flat_features = np.hstack(color_features, hog_features)
     return hog_feat
 
 
