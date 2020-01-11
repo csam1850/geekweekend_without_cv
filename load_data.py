@@ -78,7 +78,7 @@ def load_fruit_data(fruits, data_type, print_n=True, dim=100):
         for image_path in glob.glob(os.path.join(p, "*.jpg")):
             img = cv2.imread(image_path, cv2.IMREAD_COLOR)
             img = preprocess_data(img, dim)
-            print(image_path)
+
             images.append(img)
             labels.append(i)
             paths.append(image_path)
