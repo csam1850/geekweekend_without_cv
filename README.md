@@ -136,9 +136,6 @@ https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-custom-do
 https://docs.microsoft.com/en-us/azure/python/tutorial-deploy-containers-01  
 
 ## using azure cognitive services
-https://azure.microsoft.com/de-de/services/cognitive-services/custom-vision-service/  
-https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/  
 https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier  
-https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/python-tutorial  
 https://docs.microsoft.com/bs-latn-ba/azure/cognitive-services/custom-vision-service/export-your-model  
 https://docs.microsoft.com/bs-latn-ba/azure/cognitive-services/custom-vision-service/export-model-python
