@@ -135,7 +135,7 @@ https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xix-deployment
 https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-custom-docker-image  
 https://docs.microsoft.com/en-us/azure/python/tutorial-deploy-containers-01  
 
-## using azure cognitive services
+## using azure custom vision
 https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/getting-started-build-a-classifier  
 https://docs.microsoft.com/bs-latn-ba/azure/cognitive-services/custom-vision-service/export-your-model  
 https://docs.microsoft.com/bs-latn-ba/azure/cognitive-services/custom-vision-service/export-model-python
