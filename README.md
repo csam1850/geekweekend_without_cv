@@ -76,7 +76,7 @@ docker run -d -p 5000:5000 geekweekendcontainer.azurecr.io/classifier:latest
 ### Creating a Docker Container and pushing it to a registry
 pushing the container image to azure docker registry  
 go to Azure portal first and create a container registry - make sure to put
-admin on enabled  
+admin on enabled and the name of the container registry should fit to the first part of the tag of the image. In our case this is geekweekendcontainer  
 
 ```shell
 # login to azure
@@ -86,6 +86,11 @@ az acr login --name <acrName>
 ```  
 right click the image and push *OR ALERNATIVELY* on the Command Palette (Ctrl+Shift+P), select Docker: Push.
 
+If the notification pops up that further authentification is required, try the following:  
+```shell
+az acr credential show --name <azure-container-registry-name>  
+docker login <azure-container-registry-name>.azurecr.io --username <registry-username>  
+```
 
 ### Deploying a container image to Azure App Service
 right click the image in the registry and press `Deploy Image to Azure App Service`  
