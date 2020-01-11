@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv"
+			"path": "C:\\Users\\tim.lechner\\source\\repos\\geekweekend_without_cv"
 		}
 	],
 	"settings": {
 		"git.ignoreLimitWarning": true,
 		"terminal.integrated.env.windows": {
-			"PYTHONPATH": "C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv"
+			"PYTHONPATH": "C:\\Users\\tim.lechner\\source\\repos\\geekweekend_without_cv"
 		}
 	}
 }

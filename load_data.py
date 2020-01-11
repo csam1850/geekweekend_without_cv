@@ -78,7 +78,7 @@ def load_fruit_data(fruits, data_type, print_n=True, dim=100):
         for image_path in glob.glob(os.path.join(p, "*.jpg")):
             img = cv2.imread(image_path, cv2.IMREAD_COLOR)
             img = preprocess_data(img, dim)
-
+            print(image_path)
             images.append(img)
             labels.append(i)
             paths.append(image_path)
@@ -109,8 +109,10 @@ def load_single_image(image_path, dim=100):
     return img
 
 
-load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Test\\Strawberry\\20191208_185513.jpg')  # noqa: E501
-load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Test\\Banana\\20191208_105306.jpg')  # noqa: E501
-load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Banana\\20191214_143631.jpg')  # noqa: E501
-load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Pineapple\\20191231_131641.jpg')  # noqa: E501
-load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Avocado\\20191231_131543.jpg')  # noqa: E501
+# dir_path = os.path.dirname(os.path.realpath(__file__))
+# image_path = os.path.join(dir_path, 'fruits-360\\Test\\Strawberry\\20191208_185513.jpg')
+# load_single_image(image_path)  # noqa: E501
+# load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Test\\Banana\\20191208_105306.jpg')  # noqa: E501
+# load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Banana\\20191214_143631.jpg')  # noqa: E501
+# load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Pineapple\\20191231_131641.jpg')  # noqa: E501
+# load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Avocado\\20191231_131543.jpg')  # noqa: E501
