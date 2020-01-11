@@ -94,6 +94,9 @@ go to Azure App Service in vs code right click your application and press
 `Add New Setting...`. 
 Type in WEBSITES_PORT and 5000 to expose the port of your container
 
+# Workshop Challenge
+Go to https://www.customvision.ai/ and create a workspace. Generate an image classifier from the test images contained in the directory. Export the model and replace the existing model in the application with this one.  
+You can use the tutorials mentioned in the links below
 
 # Sources
 ## dataset

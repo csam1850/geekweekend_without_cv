@@ -110,7 +110,7 @@ def load_single_image(image_path, dim=100):
 
 
 # dir_path = os.path.dirname(os.path.realpath(__file__))
-# image_path = os.path.join(dir_path, 'fruits-360\\Test\\Strawberry\\20191208_185513.jpg')
+# image_path = os.path.join(dir_path, 'fruits-360\\Test\\Strawberry\\20191208_185513.jpg')  # noqa: E501
 # load_single_image(image_path)  # noqa: E501
 # load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Test\\Banana\\20191208_105306.jpg')  # noqa: E501
 # load_single_image('C:\\Users\\tim.lechner\\source\\productionizing_ML_models\\application_without_cv\\fruits-360\\Training\\Banana\\20191214_143631.jpg')  # noqa: E501
